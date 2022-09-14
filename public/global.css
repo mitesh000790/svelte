@@ -2,6 +2,7 @@
     --gradient: linear-gradient(90deg, #0072ff 0%, #00d4ff 100%);
     --light: #fff;
     --grey: #f8f9fa;
+    --tw-text-opacity: 1;
 }
 
 html,

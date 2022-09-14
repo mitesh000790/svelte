@@ -10,12 +10,9 @@
         "/": Home,
         "/login": Login,
         "/sign-up": SignUp,
-        "/add-music": AddMusic,
+        "/add-music": AddMusic
     }
 </script>
-
-
-
 
 <Navbar/>
 <main>
