@@ -1,11 +1,41 @@
 <script>
     import Input from "../../components/Input.svelte"
     import Button from "../../components/Button.svelte"
+    import { userToken } from "../store/store"
     let email = '';
     let password = '';
 
     const submit = () => {
-        console.log("value------>", email)
+        const payload = {
+            email: email,
+            password: password
+        }
+
+        if((email === '' && password === '')){
+            console.log("All field are required")
+        } else {
+            let options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(payload)
+            }
+
+            let fetchRes = fetch(
+                    "http://localhost:3000/login",
+                    options);
+            fetchRes.then(res =>
+
+                res.json()).then(d => {
+                localStorage.setItem("userToken", d.token);
+                userToken.update(() =>d.token);
+                if(d.message === 'Login Successful'){
+                    email = '';
+                    password = '';
+                }
+            })
+        }
     }
 
 </script>
