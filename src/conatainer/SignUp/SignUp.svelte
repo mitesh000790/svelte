@@ -6,12 +6,43 @@
     let email = '';
     let password = '';
 
+    import { signUp } from "../store/store"
+
     const submit = () => {
-        console.log("value------>", firstName)
+        const payload = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        }
+
+        if((firstName === '' && lastName === '' && email === '' && password === '')){
+            console.log("All field are required")
+        } else {
+            let options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type':
+                            'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(payload)
+            }
+
+            let fetchRes = fetch(
+                    "http://localhost:3000/register",
+                    options);
+            fetchRes.then(res =>
+                    res.json()).then(d => {
+                    if(d.message === 'User Created Successfully'){
+                        firstName = '';
+                        lastName = '';
+                        email = '';
+                        password = '';
+                    }
+            })
+        }
     }
-
 </script>
-
 
 <body>
 <form>
